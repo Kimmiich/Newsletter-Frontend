@@ -1,0 +1,73 @@
+html,
+body {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0px auto;  
+}
+body {
+    margin-top: 40px;
+    font-family: 'Roboto', sans-serif;
+    button {
+        background-color: #c1f1e5ef;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1em;
+    }
+    button:hover {
+        background-color: #40caa5f6;
+    }
+
+    header {
+        img {
+            width: 400px;
+        }
+        button {
+            border-radius: 7px;
+            border-color: rgb(223, 229, 230);
+            background-color: #c1f1e5ef;
+            font-family: 'Roboto', sans-serif;
+            padding: 4px;
+        } 
+    }
+
+    main {
+        h1 {
+            font-family: 'Yusei Magic', sans-serif;
+            font-size: 2em;
+        } 
+        p {
+            font-size: 1.3em;
+            max-width: 400px;
+        }
+        button {
+                border-radius: 3px;
+                border-color:  #c1f1e5ef;
+                padding: 4px;
+            }
+        input {
+            font-size: 1em;
+            font-family: 'Roboto', sans-serif;
+            border-radius: 3px;
+            border-color: #c1f1e5ef;
+            padding: 4px;
+        }
+        .mainCont {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        .newUserCont {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+    }
+
+    footer {
+        ul {
+            padding-left: 5px;
+            li {
+            list-style: none;
+            font-size: 0.8em;
+            }
+        }
+    }
+}
