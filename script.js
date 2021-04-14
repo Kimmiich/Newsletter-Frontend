@@ -12,27 +12,32 @@ const nav = document.getElementById("nav");
 const section = document.getElementById("section");
 
 //RUNTIME
-startPage();
+// IF-METHOD THAT CHANGES PRINTED PAGE DEPENDING ON USER STILL BEING SIGNED IN
+if (localStorage.getItem("id") !== null) {
+  loggedIn();
+} else {
+  startPage();
+}
 
 document.addEventListener("click", (evt) => {
-  console.log(evt.target.id);
+  // console.log(evt.target.id);
 
   switch (evt.target.id) {
     case "mainLogIn":
-      logIn();
-      loggedIn();
+      checkLogIn();
       break;
     case "btnLogIn":
       startPage();
       break;
     case "btnNewUser":
-      addingNewUser();
+      createNewUser();
       break;
     case "logOut":
+      localStorage.clear();
       startPage();
       break;
     case "saveNewUser":
-      addUser();
+      addNewUser();
       startPage();
       break;
   }
@@ -45,7 +50,7 @@ function loggedIn() {
   nav.innerHTML = `
     <button id="logOut">Log out</button>`;
   section.innerHTML = `
-    <h1 id='mainHeadline'>Welcome ${localStorage.getItem("user")}!</h1>
+    <h1 id='mainHeadline'>Welcome!</h1>
     <p> You are now able to use this amazing website, enjoy.</p>`;
 }
 
@@ -61,18 +66,18 @@ function failedLogIn() {
 }
 
 //FUNCTION FOR PRINTING PAGE: NEW USER
-function addingNewUser() {
+function createNewUser() {
   nav.innerHTML = createUserHeader;
   section.innerHTML = createUserMain;
 }
 
 // LOG IN FUNCTION
-function logIn() {
-  // CREATE A VARIABEL FROM INPUT-VALUES
+function checkLogIn() {
+  // CREATE A VARIABEL FROM INPUTS
   let user = {
     id: "",
     userName: document.getElementById("userNameInput").value,
-    passWord: document.getElementById("passwordInput").value,
+    password: document.getElementById("passwordInput").value,
   };
 
   // CREATE A POST TO BACKEND
@@ -82,13 +87,19 @@ function logIn() {
     body: JSON.stringify(user),
   })
     .then((resp) => resp.json())
-    .then((data) => {
-      console.log(data);
+    .then((user) => {
+      console.log(user);
+      if (user != "Error") {
+        localStorage.setItem("id", user);
+        loggedIn();
+      } else {
+        failedLogIn();
+      }
     });
 }
 
 // NEW USER FUNCTION
-function addUser() {
+function addNewUser() {
   // CREATE A VARIABEL FROM INPUT-VALUES
   let newUser = {
     id: "",
