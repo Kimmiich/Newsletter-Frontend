@@ -1,116 +1,110 @@
+import {
+  startPageHeader,
+  startPageMain,
+  createUserHeader,
+  createUserMain,
+  failedLogInHeader,
+  failedLogInMain,
+} from "./modules/templates.mjs";
+
 //PICKED UP ELEMENT FROM HTML
-const header = document.getElementById("header");
-const main = document.getElementById("main");
+const nav = document.getElementById("nav");
+const section = document.getElementById("section");
 
-//ARRAY WITH USERNAME AND PASSWORDS
-let users = [
-    {userName: "Janne", password: "test"},
-    {userName: "Kimmie", password: "testarigen"},
-    {userName: "Kenny", password: "testarinte"}
-];
+//RUNTIME
+startPage();
 
-//LOAD ARRAY TO LOCALSTORAGE - NOT SOLVED WITH ADD NEW USERS!
-if (localStorage.getItem("users") == null);{
-    console.log("Jag har sparat arrayen");
-    localStorage.setItem("users", JSON.stringify(users));
-};    
+document.addEventListener("click", (evt) => {
+  console.log(evt.target.id);
 
-//FUNCTION FOR PRINTING PAGE: SIGNED IN USER
+  switch (evt.target.id) {
+    case "mainLogIn":
+      logIn();
+      loggedIn();
+      break;
+    case "btnLogIn":
+      startPage();
+      break;
+    case "btnNewUser":
+      addingNewUser();
+      break;
+    case "logOut":
+      startPage();
+      break;
+    case "saveNewUser":
+      addUser();
+      startPage();
+      break;
+  }
+});
+
+//=== FUNCTIONS ===//
+
+//PRINTING PAGE: SIGNED IN USER
 function loggedIn() {
-    nav.innerHTML = `<button id="logOut">Log out</button>`
-    section.innerHTML = `<h1 id='mainHeadline'>Welcome ${localStorage.getItem("user")}!</h1>
-        <p> You are now able to use this amazing website, enjoy.</p>`;
-    localStorage.setItem("value", "loggedInValue")
-    let logOut = document.getElementById("logOut");
-    logOut.addEventListener("click", function(){
-        console.log("Logga ut");
-        loggedOut();
-    });
-};
+  nav.innerHTML = `
+    <button id="logOut">Log out</button>`;
+  section.innerHTML = `
+    <h1 id='mainHeadline'>Welcome ${localStorage.getItem("user")}!</h1>
+    <p> You are now able to use this amazing website, enjoy.</p>`;
+}
 
 //FUNCTION FOR PRINTING PAGE: LOGGED OUT USER
-function loggedOut() {
-    location.reload();
-    localStorage.clear();
-};
+function startPage() {
+  nav.innerHTML = startPageHeader;
+  section.innerHTML = startPageMain;
+}
+//FUNCTION FOR PRINTING PAGE: FAILED LOG IN
+function failedLogIn() {
+  nav.innerHTML = failedLogInHeader;
+  section.innerHTML = failedLogInMain;
+}
 
 //FUNCTION FOR PRINTING PAGE: NEW USER
 function addingNewUser() {
-    nav.innerHTML = `<button id="btnNewUser">Create new account</button> <button id="btnLogIn">Sign in</button>`;
-    section.innerHTML = `<h1 id='mainHeadline'>Create a new account</h1>
-    <form id="newUserCont" class="newUserCont">
-    <input placeholder="Nickname" type="text" id="userNameInput">
-    <input placeholder="Password" type="text" id="passwordInput"> <button id="saveNewUser">Save</button>
-    </form>`;
-    //BUTTON FOR SAVING NEW USER - NOT SOLVED THIS!!
-    saveNewUser.addEventListener("click", () => {
-        console.log("Sparar ny användare");
-        addingNewUserToArray(userNameInput, passwordInput);
+  nav.innerHTML = createUserHeader;
+  section.innerHTML = createUserMain;
+}
+
+// LOG IN FUNCTION
+function logIn() {
+  // CREATE A VARIABEL FROM INPUT-VALUES
+  let user = {
+    id: "",
+    userName: document.getElementById("userNameInput").value,
+    passWord: document.getElementById("passwordInput").value,
+  };
+
+  // CREATE A POST TO BACKEND
+  fetch("http://localhost:3000/users", {
+    method: "post",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(user),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data);
     });
-    //EXTRA SIGN IN BUTTON
-    btnLogIn.addEventListener("click", () => location.reload());
-};
-    
-//FUNCTION FOR PRINTING PAGE: ADD NEW USER - NOT SOLVED THIS!!
-function addingNewUserToArray(userNameInput, passwordInput) {
-    let newUser = {userName: userNameInput.value, password: passwordInput.value};
-    console.log(newUser);
+}
 
-    let getUsers = JSON.parse(localStorage.getItem("users"));
+// NEW USER FUNCTION
+function addUser() {
+  // CREATE A VARIABEL FROM INPUT-VALUES
+  let newUser = {
+    id: "",
+    userName: document.getElementById("newUser").value,
+    passWord: document.getElementById("newPassword").value,
+  };
+  console.log(newUser);
 
-    getUsers.push(newUser);
-    console.log(getUsers);
-
-    localStorage.setItem("users", JSON.stringify(getUsers));  
-};
-    
-//HOMEPAGE/STARTPAGE
-//CREATE HEADER, NAV WITH BUTTTON "NEW USER"
-header.insertAdjacentHTML("beforeend", `<nav id="nav"><button id="btnNewUser">Create new account</button>`);
-
-//CREATE SECTION IN MAIN WITH H1 AND FORM FOR SIGNING IN
-main.insertAdjacentHTML("afterbegin", `<section id='section'>
-    <h1 id='mainHeadline'>Welcome!</h1><p class="welcText">Sign in to unlock a world of possibilities.</p>
-    <form id="mainCont" class="mainCont">
-    <input placeholder="Nickname" type="text" id="userNameInput">
-    <input placeholder="Password" type="text" id="passwordInput"> 
-    <button id="mainLogIn">Sign in</button>
-    </form>
-    </section>`
-);
-
-//SIGN-IN BUTTON
-mainLogIn.addEventListener("click", () => {
-    let userName = document.getElementById("userNameInput").value;
-    let password = document.getElementById("passwordInput").value;
-    console.log("Knappen logga in funkar");
-    localStorage.setItem("user", userName);
-    //FOR LOOP FOR USERS
-    for (user in users) {  
-        //IF-METHOD THAT SHOWS SIGNED IN PAGE IF LOG IN SUCCEDS
-        if (userName == users[user].userName && password == users[user].password) {
-            console.log("Du loggas in");
-            loggedIn();
-            return;
-        };
-    }; 
-
-    //IF THE IF-METHOD FAILS SHOW ERROR PAGE WITH NEW BUTTONS INSTEAD
-    nav.innerHTML = `<button id="btnNewUser">Create new account</button> <button id="btnLogIn">Sign in</button>`;
-    section.innerHTML = `<h1 id='mainHeadline'>Whoops!</h1>
-    <p id="logInCont"> We can't seem to find you, please try again.</p>`;
-
-    //EXTRA SIGN IN BUTTON
-    btnLogIn.addEventListener("click", () => location.reload());
-              
-    //NEW USER BUTTON
-    btnNewUser.addEventListener("click", () => addingNewUser());
-});
-
-//ADDITIONAL BUTTON NEW USER
-btnNewUser.addEventListener("click", () => addingNewUser());
-
-// IF-METHOD THAT CHANGES PRINTED PAGE DEPENDING ON USER STILL BEING SIGNED IN 
-if(localStorage.getItem("value", "loggedInValue")){
-    loggedIn();
-};
+  // CREATE A POST TO BACKEND
+  fetch("http://localhost:3000/users/new", {
+    method: "post",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(newUser),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
