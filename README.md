@@ -11,7 +11,7 @@ En enkel inloggningsuppgift där vi fick jobba mot följande krav:
 -  Det skall gå att skapa och logga in med en ny användare (Då skall ett nytt formulär för detta visas på innehålls-sidan).
 
 ## Sedan utvecklades det till...
-Utveckla övningen - du ska nu utveckla en headless inloggningssida:
+Du ska nu utveckla en headless inloggningssida:
 -  Utgå från din inloggningssida från Javascript grundkursen.
 -  Flytta över inloggnigslogiken till servern.
 -  Utveckla ett API (Med express js) som du kan anropa från front end applikationen som sedan skickar namn och lösenord till en route på servern.
