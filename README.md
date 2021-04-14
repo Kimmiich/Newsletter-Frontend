@@ -1,6 +1,6 @@
 # Frontend-Log-in-page
 Från en uppgift till en annan!
-##Detta repo startade som...
+## Detta repo startade som...
 En enkel inloggningsuppgift där vi fick jobba mot följande krav:
 -  Skapa en inloggningssida som visar dynamiskt rätt innehåll hela tiden.
 -  Det går att logga in.
@@ -10,7 +10,7 @@ En enkel inloggningsuppgift där vi fick jobba mot följande krav:
 -  Välkomstsidan skall dynamiskt visa rätt användarnamn beroende på vem som är inloggad.
 -  Det skall gå att skapa och logga in med en ny användare (Då skall ett nytt formulär för detta visas på innehålls-sidan).
 
-##Sedan utvecklades det till...
+## Sedan utvecklades det till...
 Utveckla övningen - du ska nu utveckla en headless inloggningssida:
 -  Utgå från din inloggningssida från Javascript grundkursen.
 -  Flytta över inloggnigslogiken till servern.
