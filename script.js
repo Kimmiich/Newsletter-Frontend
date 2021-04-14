@@ -47,10 +47,11 @@ document.addEventListener("click", (evt) => {
 
 //PRINTING PAGE: SIGNED IN USER
 function loggedIn() {
+  let currentUser = localStorage.getItem("name");
   nav.innerHTML = `
     <button id="logOut">Log out</button>`;
   section.innerHTML = `
-    <h1 id='mainHeadline'>Welcome!</h1>
+    <h1 id='mainHeadline'>Welcome ${currentUser}!</h1>
     <p> You are now able to use this amazing website, enjoy.</p>`;
 }
 
@@ -90,7 +91,8 @@ function checkLogIn() {
     .then((user) => {
       console.log(user);
       if (user != "Error") {
-        localStorage.setItem("id", user);
+        localStorage.setItem("id", user.id);
+        localStorage.setItem("name", user.userName);
         loggedIn();
       } else {
         failedLogIn();
