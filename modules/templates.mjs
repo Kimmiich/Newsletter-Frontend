@@ -7,7 +7,7 @@ const startPageMain = `
     <p class="welcText">Sign in to unlock a world of possibilities.</p>
     <div id="mainCont" class="mainCont">
     <input placeholder="Nickname" type="text" id="userNameInput">
-    <input placeholder="Password" type="text" id="passwordInput"> 
+    <input placeholder="Password" type="password" id="passwordInput"> 
     <button id="mainLogIn">Sign in</button>
     </div>`;
 
@@ -19,7 +19,7 @@ const createUserMain = `
     <h1 id='mainHeadline'>Create a new account</h1>
     <div id="newUserCont" class="newUserCont">
     <input placeholder="Nickname" type="text" id="newUser">
-    <input placeholder="Password" type="text" id="newPassword"> <button id="saveNewUser">Save</button>
+    <input placeholder="Password" type="password" id="newPassword"> <button id="saveNewUser">Save</button>
     </div>`;
 
 //ERROR PAGE
