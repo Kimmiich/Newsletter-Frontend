@@ -82,7 +82,7 @@ function checkLogIn() {
   };
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users", {
+  fetch("https://kimmie-app.herokuapp.com/users", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(user),
@@ -111,7 +111,7 @@ function addNewUser() {
   console.log(newUser);
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users/new", {
+  fetch("https://kimmie-app.herokuapp.com/users/new", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(newUser),
