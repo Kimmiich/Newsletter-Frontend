@@ -82,7 +82,7 @@ function checkLogIn() {
   };
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users", {
+  fetch("https://kimmie-app.herokuapp.com/users", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(user),
@@ -106,12 +106,12 @@ function addNewUser() {
   let newUser = {
     id: "",
     userName: document.getElementById("newUser").value,
-    passWord: document.getElementById("newPassword").value,
+    password: document.getElementById("newPassword").value,
   };
   console.log(newUser);
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users/new", {
+  fetch("https://kimmie-app.herokuapp.com/users/new", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(newUser),
