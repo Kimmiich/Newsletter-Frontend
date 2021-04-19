@@ -19,7 +19,10 @@ const createUserMain = `
     <h1 id='mainHeadline'>Create a new account</h1>
     <div id="newUserCont" class="newUserCont">
     <input placeholder="Nickname" type="text" id="newUser">
-    <input placeholder="Password" type="password" id="newPassword"> <button id="saveNewUser">Save</button>
+    <input placeholder="Email" type="text" id="email">
+    <input placeholder="Password" type="password" id="newPassword"> 
+    <input type="checkbox" id="prenumeration" name="prenumeration"><label for="prenumeration">Ja, jag vill prenumerera på nyhetsbrevet.</label> 
+    <button id="saveNewUser">Save</button>
     </div>`;
 
 //ERROR PAGE
