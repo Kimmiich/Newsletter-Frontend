@@ -40,8 +40,8 @@ document.addEventListener("click", (evt) => {
       addNewUser();
       startPage();
       break;
-    case "prenumeration":
-      console.log("ändra status");
+    case "subBtn":
+      changeSubscribtion();
       break;
   }
 });
@@ -51,14 +51,17 @@ document.addEventListener("click", (evt) => {
 //PRINTING PAGE: SIGNED IN USER
 function loggedIn() {
   let currentUser = localStorage.getItem("name");
-  let currentSubStatus = localStorage.getItem("prenumeration");
+  let currentSubStatus = localStorage.getItem("subscription");
   let checkboxStatus;
 
   if (currentSubStatus == "true") {
-    checkboxStatus = `<input type="checkbox" id="prenumeration" name="prenumeration"><label for="prenumeration">Jag vill sluta få nyhetsbrev!</label>`;
+    checkboxStatus = `<p>We hope you enjoy our awesome newsletter.</p>
+    <button id="subBtn">Unsubscribe</button>`;
   } else {
-    checkboxStatus = `<input type="checkbox" id="prenumeration" name="prenumeration"><label for="prenumeration">Ja, jag vill få nyhetsbrev!</label>`;
+    checkboxStatus = `<p>Don't miss out on our awesome newsletter!</p>
+    <button id="subBtn">Subscribe</button>`;
   }
+
   nav.innerHTML = `
     <button id="logOut">Log out</button>`;
   section.innerHTML = `
@@ -94,7 +97,7 @@ function checkLogIn() {
   };
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users", {
+  fetch("https://kimmie-app.herokuapp.com/users", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(user),
@@ -105,7 +108,7 @@ function checkLogIn() {
       if (user != "Error") {
         localStorage.setItem("id", user.id);
         localStorage.setItem("name", user.userName);
-        localStorage.setItem("prenumeration", user.prenumeration);
+        localStorage.setItem("subscription", user.subscription);
         loggedIn();
       } else {
         failedLogIn();
@@ -121,12 +124,12 @@ function addNewUser() {
     userName: document.getElementById("newUser").value,
     email: document.getElementById("email").value,
     password: document.getElementById("newPassword").value,
-    prenumeration: document.getElementById("prenumeration").checked,
+    subscription: document.getElementById("subscription").checked,
   };
   console.log(newUser);
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users/new", {
+  fetch("https://kimmie-app.herokuapp.com/users/new", {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(newUser),
@@ -138,18 +141,26 @@ function addNewUser() {
 }
 
 function changeSubscribtion() {
-  let subStatus = {
-    prenumeration: document.getElementById("prenumeration").checked,
+  let currentUserId = localStorage.getItem("id");
+  let currentSub = localStorage.getItem("subscription");
+
+  console.log(currentSub);
+
+  let userInfo = {
+    id: currentUserId,
+    subscription: currentSub,
   };
 
   // CREATE A POST TO BACKEND
-  fetch("http://localhost:3000/users", {
+  fetch(`https://kimmie-app.herokuapp.com/users/changes/${currentUserId}`, {
     method: "post",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(subStatus),
+    body: JSON.stringify(userInfo),
   })
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
+      localStorage.setItem("subscription", data);
+      loggedIn();
     });
 }
