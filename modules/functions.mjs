@@ -7,8 +7,6 @@ import {
   failedLogInMain,
 } from "./templates.mjs";
 
-//=== FUNCTIONS ===//
-
 //PRINTING PAGE: SIGNED IN USER
 function loggedIn() {
   let currentUser = localStorage.getItem("name");
