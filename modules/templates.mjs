@@ -18,6 +18,7 @@ const createUserHeader = `
 `;
 const createUserMain = `
     <h1 id='mainHeadline'>Create a new account</h1>
+    <div id="tryAgain" style="display: none"> You missed some required fields</div> 
     <div id="newUserCont" class="newUserCont">
     <input placeholder="Nickname" type="text" id="newUser">
     <input placeholder="Email" type="text" id="email">

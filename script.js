@@ -11,7 +11,6 @@ import {
 const nav = document.getElementById("nav");
 const section = document.getElementById("section");
 
-//RUNTIME
 // IF-METHOD THAT CHANGES PRINTED PAGE DEPENDING ON USER STILL BEING SIGNED IN
 if (localStorage.getItem("id") !== null) {
   loggedIn();
@@ -38,7 +37,6 @@ document.addEventListener("click", (evt) => {
       break;
     case "saveNewUser":
       addNewUser();
-      startPage();
       break;
     case "subBtn":
       changeSubscribtion();
@@ -55,10 +53,10 @@ function loggedIn() {
   let checkboxStatus;
 
   if (currentSubStatus == "true") {
-    checkboxStatus = `<p>We hope you enjoy our awesome newsletter.</p>
+    checkboxStatus = `<p class="subText">We hope you enjoy our awesome newsletter.</p>
     <button id="subBtn">Unsubscribe</button>`;
   } else {
-    checkboxStatus = `<p>Don't miss out on our awesome newsletter!</p>
+    checkboxStatus = `<p class="subText">Don't miss out on our awesome newsletter!</p>
     <button id="subBtn">Subscribe</button>`;
   }
 
@@ -118,26 +116,36 @@ function checkLogIn() {
 
 // NEW USER FUNCTION
 function addNewUser() {
-  // CREATE A VARIABEL FROM INPUT-VALUES
-  let newUser = {
-    id: "",
-    userName: document.getElementById("newUser").value,
-    email: document.getElementById("email").value,
-    password: document.getElementById("newPassword").value,
-    subscription: document.getElementById("subscription").checked,
-  };
-  console.log(newUser);
+  let newUserName = document.getElementById("newUser").value;
+  let newUserPw = document.getElementById("newPassword").value;
+  let newUserEmail = document.getElementById("email").value;
+  if (newUserName == "" || newUserPw == "" || newUserEmail == "") {
+    section.innerHTML = createUserMain;
+    document.getElementById("tryAgain").style = "display: block";
+  } else {
+    // CREATE A VARIABEL FROM INPUT-VALUES
+    let newUser = {
+      id: "",
+      userName: newUserName,
+      email: newUserEmail,
+      password: newUserPw,
+      subscription: document.getElementById("subscription").checked,
+    };
+    console.log(newUser);
 
-  // CREATE A POST TO BACKEND
-  fetch("https://kimmie-app.herokuapp.com/users/new", {
-    method: "post",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify(newUser),
-  })
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log(data);
-    });
+    // CREATE A POST TO BACKEND
+    fetch("https://kimmie-app.herokuapp.com/users/new", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(newUser),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    startPage();
+  }
 }
 
 function changeSubscribtion() {
