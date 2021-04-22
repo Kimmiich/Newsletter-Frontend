@@ -1,24 +1,40 @@
-# Frontend-Log-in-page
-Från en uppgift till en annan!
-## Detta repo startade som...
-En enkel inloggningsuppgift där vi fick jobba mot följande krav:
--  Skapa en inloggningssida som visar dynamiskt rätt innehåll hela tiden.
--  Det går att logga in.
--  Inloggning ska sparas i localStorage.
--  Det går att logga ut.
--  Det skall finnas fler användare.
--  Välkomstsidan skall dynamiskt visa rätt användarnamn beroende på vem som är inloggad.
--  Det skall gå att skapa och logga in med en ny användare (Då skall ett nytt formulär för detta visas på innehålls-sidan).
+# NEWSLETTER - FRONTEND
 
-## Sedan utvecklades det till...
-Du ska nu utveckla en headless inloggningssida:
--  Utgå från din inloggningssida från Javascript grundkursen.
--  Flytta över inloggnigslogiken till servern.
--  Utveckla ett API (Med express js) som du kan anropa från front end applikationen som sedan skickar namn och lösenord till en route på servern.
--  Skapa flera användare till ett object array (global array) på servern så att du kan logga in med olika användare. Varje användare skall ha ett unikt ID.
--  Servern skall sedan kolla om det är en korrekt inloggning och i så fall svara med användarens ID, spara detta i localStorage på klienten. 
--  Vid felaktig inloggning skall en error skickas tillbaka.
+This is the frontend part of an exercise within the course dynamic web development.
 
-### [Ni hittar backend repot här](https://github.com/Kimmiich/Backend-Log-in-page)
+## Background
 
+---
 
+In this project we’re asked to build a frontend where a user can create an account and choose to subscribe to a newsletter or not.
+
+The user should also be able to log in to their account and change the subscription status. This part of the project should be coded with headless principles.
+
+## Launch demo
+
+---
+
+The frontend is provided through github pages and can be tested [here](gör till länk)
+
+### Existing users and passwords:
+
+| Name   | Password |
+| ------ | -------- |
+| Kimmie | test     |
+| Janne  | testtest |
+
+## Installation
+
+---
+
+> Feel free to clone this repo and look at it locally.
+
+I recommend using **VS code**, there you can use the live-server option too see local changes etc.
+
+## Other details
+
+---
+
+[This is a link to my backend repo of this exercise.](https://github.com/Kimmiich/Backend-Log-in-page)
+
+The database is online at mongo db atlas.
