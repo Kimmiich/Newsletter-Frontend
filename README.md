@@ -10,7 +10,7 @@ The user should also be able to log in to their account and change the subscript
 
 ## Launch demo
 
-The frontend is provided through github pages and can be tested [here](gör till länk)
+The frontend is provided through github pages and can be tested [here](https://kimmiich.github.io/Newsletter-Frontend/)
 
 ### Existing users and passwords:
 
