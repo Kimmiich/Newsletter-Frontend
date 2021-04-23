@@ -119,7 +119,7 @@ function changeSubscribtion() {
   };
 
   // CREATE A POST TO BACKEND
-  fetch(`https://kimmie-app.herokuapp.com/users/changes/${currentUserId}`, {
+  fetch(`https://kimmie-app.herokuapp.com/users/changes`, {
     method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(userInfo),
