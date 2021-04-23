@@ -1,5 +1,4 @@
-html,
-body {
+html {
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
@@ -8,6 +7,10 @@ body {
 body {
   margin-top: 40px;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px auto;
   button {
     background-color: #c1f1e5ef;
     font-family: "Roboto", sans-serif;
